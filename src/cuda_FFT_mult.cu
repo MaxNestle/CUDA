@@ -11,6 +11,7 @@
 
 
 
+
 /*The multicplication algorithm with cuFFT is from the following source:
 Source: https://programmer.group/implementing-large-integer-multiplication-with-cufft.html
 The multWithFFT-function is edited by Max & Johannes*/
@@ -42,9 +43,9 @@ __global__ void ConvertToInt(cufftReal *a, int size)
 std::vector<int> multiply(const std::vector<float> &a, const std::vector<float> &b)
 {
 
-	clock_t t;
+	//clock_t t;
 
-	t = clock();
+	//t = clock();
 
     const auto NX = a.size();
     cufftHandle plan_a, plan_b, plan_c;
@@ -63,12 +64,12 @@ std::vector<int> multiply(const std::vector<float> &a, const std::vector<float> 
     if (cufftPlan1d(&plan_b, NX, CUFFT_R2C, BATCH) != CUFFT_SUCCESS) { fprintf(stderr, "CUFFT error: Plan creation failed"); return c; }
     if (cufftPlan1d(&plan_c, NX, CUFFT_C2R, BATCH) != CUFFT_SUCCESS) { fprintf(stderr, "CUFFT error: Plan creation failed"); return c; }
 
-	t = clock() - t;
-	double time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
-	printf("Memory and plan: %f s\n", time_taken_GPU);
+	//t = clock() - t;
+	//double time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
+	//printf("Memory and plan: %f s\n", time_taken_GPU);
 
 
-	t = clock();
+	//t = clock();
 
     //Converting A(x) to Frequency Domain
     if (cufftExecR2C(plan_a, (cufftReal*)data_a, data_a) != CUFFT_SUCCESS)
@@ -103,12 +104,12 @@ std::vector<int> multiply(const std::vector<float> &a, const std::vector<float> 
         return c;
     }
 
-    t = clock() - t;
-    time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("Calc: %f s\n", time_taken_GPU);
+    //t = clock() - t;
+    //time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    //printf("Calc: %f s\n", time_taken_GPU);
 
 
-    t = clock();
+    //t = clock();
     cudaMemcpy(&c[1], data_b, sizeof(float) * b.size(), cudaMemcpyDeviceToHost);
 
     cufftDestroy(plan_a);
@@ -117,9 +118,9 @@ std::vector<int> multiply(const std::vector<float> &a, const std::vector<float> 
     cudaFree(data_a);
     cudaFree(data_b);
 
-    t = clock() - t;
-    time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("Cleaning: %f s\n", time_taken_GPU);
+    //t = clock() - t;
+    //time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    //printf("Cleaning: %f s\n", time_taken_GPU);
 
     return c;
 }
@@ -127,88 +128,101 @@ std::vector<int> multiply(const std::vector<float> &a, const std::vector<float> 
 void print(std::vector<float> const &input)
 {
 	for (int i = 0; i < input.size(); i++) {
-		std::cout << input.at(i) << ' ';
+		std::cout << input.at(i);
 	}
+	printf("\n");
 }
 
-extern "C" void multWithFFT(BIGNUM* a, BIGNUM *b, BIGNUM **c)
+extern "C" int multWithFFT(char* a_String, char* b_String, char **c_String)
 {
 
-    const int base = 10;
-    char* a_String = BN_bn2dec(a);
-    char* b_String = BN_bn2dec(b);
+    const auto base = 10;
+
+
+    //printf("a = %s\n",a_String);
+    //printf("b = %s\n",b_String);
+
+
+    //Set base
 
     int lengthA = strlen(a_String);
     int lengthB = strlen(b_String);
 
-	printf("a: %s\n",a_String);
-	printf("b: %s\n",b_String);
+    int new_length = lengthA + lengthB;
 
-    //length of multiplication result has the size of the sum of the two factors
-    int result_length = lengthA + lengthB;
+    std::vector<float> a{};
+    std::vector<float> b{};
 
-    //factors are stored in these vectors
-    std::vector<float> av{};
-    std::vector<float> bv{};
 
-    //fill vectors step by step
+
     for(int i=0; i<lengthA; ++i){
-    	av.push_back((float)(a_String[i])-'0');
+    	a.push_back((float)(a_String[i])-'0');
     }
+
     for(int i=0; i<lengthB; ++i){
-    	bv.push_back((float)(b_String[i])-'0');
+    	b.push_back((float)(b_String[i])-'0');
     }
 
-    //vectors need to be same size
-    while (av.size() != result_length){
-    	 av.insert(av.begin(),(float) 0);
-    }
-    while (bv.size() != result_length){
-    	bv.insert(bv.begin(),(float) 0);
+    while (a.size() != new_length){
+    	 a.insert(a.begin(),(float) 0);
     }
 
-	clock_t t;
+    while (b.size() != new_length){
+    	b.insert(b.begin(),(float) 0);
+    }
 
-	t = clock();
-    //call cuda-kernel-function
-    std::vector<int> cv = multiply(av, bv);
-	t = clock() - t;
-	double time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
-	printf("Cuda_multiply: %f s\n", time_taken_GPU);
+    a.resize(new_length,(float) 0);
+    b.resize(new_length,(float) 0);
+
+    //print(a);
+    //printf("\n");
+
+    //print(b);
+    //printf("\n");
+
+    std::vector<int> c = multiply(a, b);
+
 
     //Processing carry
-    for (int i = cv.size() - 1; i > 0; i--)
+    for (int i = c.size() - 1; i > 0; i--)
     {
-        if (cv[i] >= base)
+        if (c[i] >= base)
         {
-            cv[i - 1] += cv[i] / base;
-            cv[i] %= base;
+            c[i - 1] += c[i] / base;
+            c[i] %= base;
         }
     }
 
 
     //Remove excess zeros
-    cv.pop_back();
-    auto i = 0;
+    c.pop_back();
+    auto o = 0;
+    if (c[0] == 0)
+        o++;
 
-    //For some multiplications the result has a zero as a first digit (for example 999*1 = 999 will be 0999)
-    if (cv[0] == 0)
-        i++;
+    //To output the final result, we need to change the mode of output, such as the decimal system is "% 2d" and the decimal system is "% 3d".
 
-    //If i++ will be executed the array still has to begin at element tmp[0]
+    int i = o;
+
+   /* printf("Old ");
+    for (; i < c.size(); i++)
+        printf("%d", c[i]);
+    printf("\n");
+
+*/
+    char tmp[c.size()];
     int k = 0;
-
-	char tmp[cv.size()];
-
+    i = o;
 	//convert integer vector to string
-    for (; i < cv.size(); i++){
-    	tmp[k] = (char) cv.at(i) + '0';
+    for (; i < c.size(); i++){
+    	tmp[k] = (char) c.at(i) + '0';
     	k++;
     }
     tmp[k] = '\0';
+	//printf("a: %s\n",tmp);
 
     //transfer result to cuda_mult.c
-    memcpy(*c,tmp,sizeof(tmp));
+    memcpy(*c_String,tmp,strlen(tmp));
 
-    return;
+    return k;
 }
