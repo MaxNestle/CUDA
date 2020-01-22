@@ -9,7 +9,7 @@
 #define CUDA_FFT_MULT_H_
 
 
-int multWithFFT(char* a, char *b, char **c);
+int multWithFFT(char** data, char **c, int amount);
 
 
 
