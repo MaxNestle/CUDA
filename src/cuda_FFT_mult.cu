@@ -18,6 +18,7 @@ The multWithFFT-function is edited by Max & Johannes*/
 
 const auto BATCH = 1;
 
+
 __global__ void ComplexPointwiseMulAndScale(cufftComplex *a, cufftComplex *b, int size)
 {
     const int numThreads = blockDim.x * gridDim.x;
@@ -48,8 +49,16 @@ void print(std::vector<float> const &input)
 	printf("\n");
 }
 
+void print(std::vector<int> const &input)
+{
+	for (int i = 0; i < input.size(); i++) {
+		std::cout << input.at(i);
+	}
+	printf("\n");
+}
 
-std::vector<int> multiply(const std::vector< std::vector<float>> at, std::vector< std::vector<float> > bt)
+
+std::vector<std::vector<int>> multiply(const std::vector< std::vector<float>> at, std::vector< std::vector<float> > bt, std::vector<std::vector<int>> c)
 {
 
 	clock_t t;
@@ -72,8 +81,9 @@ std::vector<int> multiply(const std::vector< std::vector<float>> at, std::vector
     cufftHandle plan_a, plan_b, plan_c;
     cufftComplex *data_a[amount];
     cufftComplex *data_b[amount];
-    std::vector<int> c(NX + 1);
-    c[0] = 0;
+
+    std::vector<int> f(NX + 1);
+    f.insert(f.begin(),0);
 
     //Allocate graphics card memory and initialize, assuming sizeof(int)==sizeof(float), sizeof(cufftComplex)==2*sizeof(float)
 
@@ -132,13 +142,18 @@ std::vector<int> multiply(const std::vector< std::vector<float>> at, std::vector
 			return c;
 		}
 
+
+
 		t = clock() - t;
 		time_taken_GPU = ((double)t)/CLOCKS_PER_SEC; // in seconds
 		printf("Calc: %f s\n", time_taken_GPU);
+
+	    cudaMemcpy(&f[1], data_b[i], sizeof(float) * bt[i].size(), cudaMemcpyDeviceToHost);
+	    print(f);
+	    c[i] = f;
 	}
 
     t = clock();
-    cudaMemcpy(&c[1], data_b[0], sizeof(float) * bt[0].size(), cudaMemcpyDeviceToHost);
 
 
     cufftDestroy(plan_a);
@@ -213,9 +228,9 @@ extern "C" int multWithFFT(char** data, char **c_String, int amount)
     }
 
     int l = 0;
-	std::vector< std::vector<int>> c(100);
-	c[l] = multiply(a,b);
-
+    std::vector<std::vector<int>> c(a.size(), std::vector<int>(new_length));
+	c = multiply(a,b,c);
+	print(c[l]);
 
 	//Processing carry
 	for (int i = c[l].size() - 1; i > 0; i--)
@@ -230,8 +245,10 @@ extern "C" int multWithFFT(char** data, char **c_String, int amount)
 
 	//Remove excess zeros
 	c[l].pop_back();
+	c[l].pop_back();
+
 	auto o = 0;
-	if (c[l][0] == 0)
+	if (c[l].at(0) == 0)
 		o++;
 
 	//To output the final result, we need to change the mode of output, such as the decimal system is "% 2d" and the decimal system is "% 3d".
@@ -242,7 +259,6 @@ extern "C" int multWithFFT(char** data, char **c_String, int amount)
 	for (; i < c.size(); i++)
 		printf("%d", c[i]);
 	printf("\n");
-
 */
 	char tmp[c[l].size()];
 	k = 0;

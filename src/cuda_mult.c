@@ -40,7 +40,7 @@ int main (int argc, const char * argv[])
 	char Prime_2_Value[] = "566862902526025592026168860088627596750028651678658181187001187611221298622578";
 
 	int amount_of_multiplications = 1;
-	int amount_of_data = 20000;
+	int amount_of_data =20;
 	int bits = 4;
 
 
