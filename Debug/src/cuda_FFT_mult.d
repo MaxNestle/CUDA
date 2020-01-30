@@ -245,4 +245,15 @@ src/cuda_FFT_mult.o : ../src/cuda_FFT_mult.cu \
     /usr/include/c++/6/bits/basic_ios.tcc \
     /usr/include/c++/6/bits/ostream.tcc \
     /usr/include/c++/6/istream \
-    /usr/include/c++/6/bits/istream.tcc
+    /usr/include/c++/6/bits/istream.tcc \
+    /usr/include/openssl/bn.h \
+    /usr/include/openssl/e_os2.h \
+    /usr/include/x86_64-linux-gnu/openssl/opensslconf.h \
+    /usr/include/openssl/opensslv.h \
+    /usr/include/openssl/ossl_typ.h \
+    /usr/include/openssl/crypto.h \
+    /usr/include/openssl/safestack.h \
+    /usr/include/openssl/stack.h \
+    /usr/include/openssl/cryptoerr.h \
+    /usr/include/openssl/symhacks.h \
+    /usr/include/openssl/bnerr.h

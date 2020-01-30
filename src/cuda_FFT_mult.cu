@@ -179,9 +179,6 @@ extern "C" int multWithFFT(char** data, char **c_String, int amount)
 	int k = 0;
     const auto base = 10;
 
-    //printf("a = %s\n",data[0]);
-    //printf("b = %s\n",data[1]);
-
     int lengthA = strlen(data[0]);
     int lengthB = strlen(data[1]);
 
@@ -190,41 +187,28 @@ extern "C" int multWithFFT(char** data, char **c_String, int amount)
 	std::vector< std::vector<float> > a(amount/2);
 	std::vector< std::vector<float> > b(amount/2);
 
-	int t = 0;
-    for(int l =0; l<amount/2; l++){
+	int data_point = 0;
+	    for(int l =0; l<amount/2; l++){
 
-		//std::vector<float> a[sizeof(data)/2]{};
-		//std::vector<float> b[sizeof(data)/2]{};
+	    	int lengthA = strlen(data[data_point]);
+			for(int i=0; i<lengthA; ++i){
+				a[l].push_back((float)(data[data_point][i])-'0');
+			}
+			data_point++;
 
+			int lengthB = strlen(data[data_point]);
+			for(int i=0; i<lengthB; ++i){
+				b[l].push_back((float)(data[data_point][i])-'0');
+			}
+			data_point++;
 
-    	//TODO
-		for(int i=0; i<lengthA; ++i){
-			a[l].push_back((float)(data[t][i])-'0');
-		}
-		t++;
-		for(int i=0; i<lengthB; ++i){
-			b[l].push_back((float)(data[t][i])-'0');
-		}
-		t++;
+			while (a[l].size() != new_length){
+				a[l].insert(a[l].begin(),(float) 0);
+			}
 
-		while (a[l].size() != new_length){
-			a[l].insert(a[l].begin(),(float) 0);
-		}
-
-		while (b[l].size() != new_length){
-			b[l].insert(b[l].begin(),(float) 0);
-		}
-
-		a[l].resize(new_length,(float) 0);
-		b[l].resize(new_length,(float) 0);
-
-		//print(a);
-		//printf("\n");
-
-		//print(b);
-		//printf("\n");
-
-
+			while (b[l].size() != new_length){
+				b[l].insert(b[l].begin(),(float) 0);
+			}
     }
 
     int l = 0;

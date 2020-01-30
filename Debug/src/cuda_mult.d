@@ -81,4 +81,7 @@ src/cuda_mult.o : ../src/cuda_mult.c \
     /usr/include/x86_64-linux-gnu/bits/sched.h \
     /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
     /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-    /usr/include/openssl/bnerr.h
+    /usr/include/openssl/bnerr.h \
+    /usr/include/string.h \
+    /usr/include/strings.h \
+    ../src/cuda_FFT_mult.h
