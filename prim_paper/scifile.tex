@@ -1,0 +1,29 @@
+\documentclass[12pt,a4paper]{article}
+\bibliographystyle{alphadin}
+\title{Multiplication of Two Bignum Prime Numbers on a Nvidia Graphic Card}
+\author{Johannes H\"abe  \\
+	jh-191149@hs-weingarten.de
+	\and 
+	Maximilian Nestle \\
+	mn-192181@hs-weingarten.de \\\\
+	Ravensburg-Weingarten University of Applied Sciences
+	}
+
+\date{\today}
+% Hint: \title{what ever}, \author{who care} and \date{when ever} could stand 
+% before or after the \begin{document} command 
+% BUT the \maketitle command MUST come AFTER the \begin{document} command! 
+\begin{document}
+
+\maketitle
+%
+\begin{abstract}
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying bignum prime numbers on the graphic card. Several different tests are presented, evaluated and compared.
+\end{abstract}
+
+\section{Introduction}
+The fast mulitplication of two large prime numbers is an important step if you want to hack asymmetrical encryption algorithms like the RSA encryption. Therefore the computing time of bignum multiplication on cpu and gpu is compared and evaluated in this paper.
+\newpage
+\bibliography{literatur}
+
+\end{document}
