@@ -1,5 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 \bibliographystyle{alphadin}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{minted}
 \title{Multiplication of Two Bignum Prime Numbers on a Nvidia Graphic Card}
 \author{Johannes H\"abe  \\
 	jh-191149@hs-weingarten.de
@@ -14,20 +16,37 @@
 % before or after the \begin{document} command 
 % BUT the \maketitle command MUST come AFTER the \begin{document} command! 
 \begin{document}
-
 \maketitle
 %
 \begin{abstract}
-This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying bignum prime numbers on the graphic card. Several different tests are presented, evaluated and compared.
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying bignum prime numbers on the graphics card. Several tests are presented, evaluated and compared.
 \end{abstract}
 
 \section{Introduction}
 The fast multiplication of two large prime numbers is necessary in some procedures to hack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignum prime numbers with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
 \section{Hardware and Environment}
-For the multiplications we used .. as GPU and ... as CPU. The Linux distribution Ubuntu is used as the operating system. To compile the code we used ....
+For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm. The \mintinline{c}{BN_mul()} function comes with the openssl library.
 
 \section{Comparison CPU with GPU}
+For the time measurement the C library function \mintinline{c}{clock(void)} is used. The legend of the graphics is explained in the following:
+\begin{description}
+\item[CPU]\hfill \\
+The time needed for the multiplications of the two bignums on the CPU using the \mintinline{c}{BN_mul()} function.
+\item[GPU\_All]\hfill \\ 
+The sum of the times needed for GPU\_Alloc, GPU\_Calc, GPU\_Clean, CUDA\_Pre, and CUDA\_Post.
+\item[GPU\_Alloc]\hfill \\ 
+The time needed to allocate the amount of graphics card memory needed for the two bignums using \mintinline{c}{cudaMalloc()} and copying them to the graphics card memory by using \mintinline{c}{cudaMemcpy()}.
+\item[GPU\_Calc]\hfill \\ 
+The amount of time needed for the calculation of the two bignums on the GPU. This includes converting the bignums to frequency domain, multiplying them with \mintinline{c}{ComplexPointwiseMulAndScale()} and converting them back to time domain.
+\item[GPU\_Clean]\hfill \\ 
+\mintinline{c}{cufftDestroy()} \mintinline{c}{cudaFree()}
+\item[CUDA\_Prep]\hfill \\ 
+\item[CUDA\_Post]\hfill \\ 
+\end{description}
+
+
+
 
 \section{Issues and Improvements}
 
