@@ -40,7 +40,7 @@ The time needed to allocate the amount of graphics card memory needed for the tw
 \item[GPU\_Calc]\hfill \\ 
 The amount of time needed for the calculation of the two bignums on the GPU. This includes converting the bignums to frequency domain, multiplying them with \mintinline{c}{ComplexPointwiseMulAndScale()} and converting them back to time domain.
 \item[GPU\_Clean]\hfill \\ 
-\mintinline{c}{cufftDestroy()} \mintinline{c}{cudaFree()}
+The sum of the times needed to copy the data back to the host by using \mintinline{c}{cudaMemcpy()} and to free the graphics card memory by using \mintinline{c}{cufftDestroy()} and \mintinline{c}{cudaFree()}.
 \item[CUDA\_Prep]\hfill \\ 
 \item[CUDA\_Post]\hfill \\ 
 \end{description}
