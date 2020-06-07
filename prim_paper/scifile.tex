@@ -42,7 +42,11 @@ The amount of time needed for the calculation of the two bignums on the GPU. Thi
 \item[GPU\_Clean]\hfill \\ 
 The sum of the times needed to copy the data back to the host by using \mintinline{c}{cudaMemcpy()} and to free the graphics card memory by using \mintinline{c}{cufftDestroy()} and \mintinline{c}{cudaFree()}.
 \item[CUDA\_Prep]\hfill \\ 
+This is the time the Program takes to convert the BIGNUM Object (String) into a float vector. This process is very timeconuming at very large numbers. Also it is neccesary that the length of the to numers are set equal. This is done with ending zeros at the front of the number.
 \item[CUDA\_Post]\hfill \\ 
+This part of the program is responsible for processing the carry and turn the result back from an integer Vector to BIGNUM String.
+
+
 \end{description}
 
 
