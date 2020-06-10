@@ -1,0 +1,584 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.16)  7 JUN 2020 13:04
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**scifile.tex
+(./scifile.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2017/07/19 v2.5 Yet another Pygments shim for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+))))
+(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count88
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2019/01/15
+
+Style option: `fancyvrb' v3.2a <2019/01/15> (tvz)
+\FV@CodeLineNo=\count89
+\FV@InFile=\read1
+\FV@TabBox=\box27
+\c@FancyVerbLine=\count90
+\FV@StepNumber=\count91
+\FV@OutFile=\write3
+)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count92
+\output=\toks15
+\linenoprevgraf=\count93
+\linenumbersep=\dimen103
+\linenumberwidth=\dimen104
+\c@linenumber=\count94
+\c@pagewiselinenumber=\count95
+\c@LN@truepage=\count96
+\c@internallinenumber=\count97
+\c@internallinenumbers=\count98
+\quotelinenumbersep=\dimen105
+\bframerule=\dimen106
+\bframesep=\dimen107
+\bframebox=\box28
+LaTeX Info: Redefining \\ on input line 3056.
+)
+\c@FV@TrueTabGroupLevel=\count99
+\c@FV@TrueTabCounter=\count100
+\FV@TabBox@Group=\box29
+\FV@TmpLength=\skip43
+\c@FV@HighlightLinesStart=\count101
+\c@FV@HighlightLinesStop=\count102
+\FV@LoopCount=\count103
+\FV@NCharsBox=\box30
+\FV@BreakIndent=\dimen108
+\FV@BreakIndentNChars=\count104
+\FV@BreakSymbolSepLeft=\dimen109
+\FV@BreakSymbolSepLeftNChars=\count105
+\FV@BreakSymbolSepRight=\dimen110
+\FV@BreakSymbolSepRightNChars=\count106
+\FV@BreakSymbolIndentLeft=\dimen111
+\FV@BreakSymbolIndentLeftNChars=\count107
+\FV@BreakSymbolIndentRight=\dimen112
+\FV@BreakSymbolIndentRightNChars=\count108
+\c@FancyVerbLineBreakLast=\count109
+\FV@LineBox=\box31
+\FV@LineIndentBox=\box32
+\FV@LineWidth=\dimen113
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count110
+\calc@Bcount=\count111
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
+\calc@Askip=\skip44
+\calc@Bskip=\skip45
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count112
+\calc@Cskip=\skip46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2016/06/07 v0.02a unified shell escape interface for LaTeX
+Package shellesc Info: Restricted shell escape enabled on input line 69.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/catchfile.sty
+Package: catchfile 2016/05/16 v1.7 Catch the contents of a file (HO)
+)
+
+Package ifplatform Warning: 
+    shell escape is disabled, so I can only detect \ifwindows.
+
+) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
+\integerpart=\count113
+\decimalpart=\count114
+)
+Package: xstring 2019/02/06 v1.83 String manipulations (CT)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip47
+\fb@frw=\dimen116
+\fb@frh=\dimen117
+\FrameRule=\dimen118
+\FrameSep=\dimen119
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count115
+\float@exts=\toks16
+\float@box=\box33
+\@float@everytoks=\toks17
+\@floatcapt=\box34
+)
+\minted@appexistsfile=\read2
+\minted@bgbox=\box35
+\minted@code=\write4
+\c@minted@FancyVerbLineTemp=\count116
+\c@minted@pygmentizecounter=\count117
+\@float@every@listing=\toks18
+\c@listing=\count118
+)
+runsystem(mkdir -p _minted-scifile)...disabled (restricted).
+
+
+
+! Package minted Error: You must invoke LaTeX with the -shell-escape flag.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 \title
+          {Multiplication of Two Bignum Prime Numbers on a Nvidia Graphic Card}
+
+Pass the -shell-escape flag to LaTeX. Refer to the minted.sty documentation for
+ more information.
+
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+runsystem(which pygmentize && touch scifile.aex)...disabled (restricted).
+
+
+
+! Package minted Error: You must have `pygmentize' installed to use this packag
+e.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.18 \begin{document}
+                     
+Refer to the installation instructions in the minted documentation for more inf
+ormation.
+
+(./scifile.aux)
+\openout1 = `scifile.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count119
+\scratchdimen=\dimen120
+\scratchbox=\box36
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen121
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks20
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 19.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 19.
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -S default -f latex -P commandprefix=PYG > _minted-scifile
+/default-pyg-prefix.pygstyle)...disabled (restricted).
+
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 ...are done with the \mintinline{c}{BN_mul()}
+                                                   function which is based o...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+runsystem(pygmentize -S default -f latex -P commandprefix=PYGdefault > _minted-
+scifile/default.pygstyle)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 ...are done with the \mintinline{c}{BN_mul()}
+                                                   function which is based o...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/DC0768B55EEA6045BA35D8D268CA6BFDA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 ...are done with the \mintinline{c}{BN_mul()}
+                                                   function which is based o...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/DC0768B55EEA6045BA35D8D268CA6BFDA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 ...on algorithm. The \mintinline{c}{BN_mul()}
+                                                   function comes with the o...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/A8D66015A99E1EC41BCB81711FEF1C57A1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 ...brary function \mintinline{c}{clock(void)}
+                                                   is used. The legend of th...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/DC0768B55EEA6045BA35D8D268CA6BFDA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 ...the CPU using the \mintinline{c}{BN_mul()}
+                                                   function.
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/97C84434B14F93515A7ED02CCB640CEFA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 ...bignums using \mintinline{c}{cudaMalloc()}
+                                                   and copying them to the g...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/38EC693EA03670B59D37E91085CA01CFA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 ...mory by using \mintinline{c}{cudaMemcpy()}
+                                                  .
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/1115BD512E8BADE74B917DB36E6A8440A1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 ...ntinline{c}{ComplexPointwiseMulAndScale()}
+                                                   and converting them back ...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/38EC693EA03670B59D37E91085CA01CFA1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 ...host by using \mintinline{c}{cudaMemcpy()}
+                                                   and to free the graphics ...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/45E088E9AEE4010922B0AA67E7417888A1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 ...ry by using \mintinline{c}{cufftDestroy()}
+                                                   and \mintinline{c}{cudaFr...
+
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout4 = `scifile.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o _minte
+d-scifile/2E18F9B23A106E40051162E05F04BF47A1B2470B7CDEA0E1DD00B93D3834A72C.pygt
+ex scifile.pyg)...disabled (restricted).
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 ...tDestroy()} and \mintinline{c}{cudaFree()}
+                                                  .
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+[2] (./scifile.bbl) [3] (./scifile.aux)
+runsystem(rm scifile.pyg)...disabled (restricted).
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4549 strings out of 494500
+ 82721 string characters out of 6174968
+ 191591 words of memory out of 5000000
+ 8191 multiletter control sequences out of 15000+600000
+ 6671 words of font info for 24 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 37i,7n,35p,897b,202s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on scifile.pdf (3 pages, 74983 bytes).
+PDF statistics:
+ 34 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

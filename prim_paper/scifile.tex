@@ -26,6 +26,7 @@ This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Tran
 The fast multiplication of two large prime numbers is necessary in some procedures to hack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignum prime numbers with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
 \section{Hardware and Environment}
+hi
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm. The \mintinline{c}{BN_mul()} function comes with the openssl library.
 
 \section{Comparison CPU with GPU}
@@ -48,28 +49,6 @@ This part of the program is responsible for processing the carry and turn the re
 
 
 \end{description}
-
-
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 390.132                Driver Version: 390.132                   |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|===============================+======================+======================|
-|   0  GeForce GTX 850M    Off  | 00000000:01:00.0 Off |                  N/A |
-| N/A   52C    P0    N/A /  N/A |    273MiB /  2004MiB |     14%      Default |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory |
-|  GPU       PID   Type   Process name                             Usage      |
-|=============================================================================|
-|    0      1154      G   /usr/lib/xorg/Xorg                           150MiB |
-|    0      1974      G   /usr/bin/compiz                               50MiB |
-|    0     10361      C   ./cuda_mult                                   61MiB |
-+-----------------------------------------------------------------------------+
-
-
 
 
 

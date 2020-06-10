@@ -23,9 +23,11 @@ double cleanin_time_average = 0;
 double calc_time_average = 0;
 double prep_time_average = 0;
 clock_t t_pre_cuda;
+double time_test_average = 0;
 double pre_cuda = 0;
 clock_t t_post_cuda;
 double post_cuda = 0;
+clock_t time_test;
 
 std::vector<int> c;
 
@@ -191,12 +193,26 @@ void multWithFFT(BIGNUM* a_BN, BIGNUM* b_BN)
     for(int i=0; i<lengthB; ++i){
     	b.push_back((float)(b_String[i])-'0');
     }
-    while (a.size() != new_length){
-    	 a.insert(a.begin(),(float) 0);
-    }
-    while (b.size() != new_length){
-    	b.insert(b.begin(),(float) 0);
-    }
+ 
+    
+    time_test = clock();
+    //while (a.size() != new_length){
+    //	 a.insert(a.begin(),(float) 0);
+    //}
+    //while (b.size() != new_length){
+    //	b.insert(b.begin(),(float) 0);
+    //}
+ 
+    int amount = new_length - a.size();
+    a.insert(a.begin(),amount,(float) 0);
+ 
+    amount = new_length - b.size();
+    b.insert(b.begin(),amount,(float) 0);
+
+ 
+    time_test = clock() - time_test;
+    time_test_average = time_test_average + ((double)time_test)/CLOCKS_PER_SEC; // in seconds
+
 
     a.resize(new_length,(float) 0);
     b.resize(new_length,(float) 0);
@@ -274,8 +290,8 @@ void multWithGPU(BIGNUM* a, BIGNUM* b){
 
 int main (int argc, const char * argv[])
 {
-	int bits_per_number  = 1;
-  int amount_of_multiplications = 30;
+	int bits_per_number  = 24;
+  int amount_of_multiplications = 100;
 
 	/*Erzeugung der notwendigen BIGNUMs*/
 	BIGNUM *Prime_1 = BN_new();
@@ -288,8 +304,9 @@ int main (int argc, const char * argv[])
   cleanin_time_average = 0;
   calc_time_average = 0;
   prep_time_average = 0;
+ time_test_average = 0;
  	clock_t time;
-  int runs = 500;
+  int runs = 800;
   std::string csv = "Bits,Prep,Calc,Clean,Pre_Cuda, Post_CUDA,GPU,CPU,,,\n"; 
 
   for (int w = 0; w < runs; w++){
@@ -302,6 +319,7 @@ int main (int argc, const char * argv[])
     prep_time_average = 0;
     pre_cuda = 0;
     post_cuda = 0;
+    time_test_average = 0;
 
     for (int l = 0; l < amount_of_multiplications; l++){
 
@@ -341,9 +359,13 @@ int main (int argc, const char * argv[])
     printf("Pre_Cuda average: \t\t%f s\n", pre_cuda/amount_of_multiplications);
     printf("Post_Cuda average: \t\t%f s\n", post_cuda/amount_of_multiplications);
 
+
     printf("GPU cleaning average: \t\t%f s\n", cleanin_time_average/amount_of_multiplications);
     printf("GPU total average: \t\t%f s\n", time_taken_GPU/amount_of_multiplications);
     printf("CPU total average: \t\t%f s\n", time_taken_CPU/amount_of_multiplications);
+
+    printf("Test: \t\t\t\t%f s\n", time_test_average/amount_of_multiplications);
+
   
     float ratio = result_right/(result_right+result_false);
     printf("false: %f right: %f ratio: %f \n\n", result_false,result_right,ratio);
@@ -364,3 +386,4 @@ int main (int argc, const char * argv[])
 
 	return 0;
 }
+
