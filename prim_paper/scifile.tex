@@ -1,8 +1,9 @@
 \documentclass[12pt,a4paper]{article}
 \bibliographystyle{alphadin}
-\usepackage[onehalfspacing]{setspace}
+%\usepackage[onehalfspacing]{setspace}
 \usepackage{minted}
-\title{Multiplication of Two Bignum Prime Numbers on a Nvidia Graphic Card}
+\usepackage{url}
+\title{Multiplication of Two Bignums on a Nvidia Graphic Card}
 \author{Johannes H\"abe  \\
 	jh-191149@hs-weingarten.de
 	\and 
@@ -19,16 +20,18 @@
 \maketitle
 %
 \begin{abstract}
-This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying bignum prime numbers on the graphics card. Several tests are presented, evaluated and compared.
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying large numbers (bignums) on the graphics card. Several tests are presented, evaluated and compared.
 \end{abstract}
 
 \section{Introduction}
 The fast multiplication of two large prime numbers is necessary in some procedures to hack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignum prime numbers with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
-\section{Hardware and Environment}
-For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm. The \mintinline{c}{BN_mul()} function comes with the openssl library.
+\section{Hardware and environment}
+For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
 
-\section{Comparison CPU with GPU}
+\section{Measurement conditions}
+The times for the multiplications of the two numbers are measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that we did computations for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent fluctuations because of random created numbers that are easy to multiply, one hundred multiplications with different numbers are done for each step of 24 bits.
+\section{Evaluation of the measured times}
 For the time measurement the C library function \mintinline{c}{clock(void)} is used. The legend of the graphics is explained in the following:
 \begin{description}
 \item[CPU]\hfill \\
@@ -42,33 +45,12 @@ The amount of time needed for the calculation of the two bignums on the GPU. Thi
 \item[GPU\_Clean]\hfill \\ 
 The sum of the times needed to copy the data back to the host by using \mintinline{c}{cudaMemcpy()} and to free the graphics card memory by using \mintinline{c}{cufftDestroy()} and \mintinline{c}{cudaFree()}.
 \item[CUDA\_Prep]\hfill \\ 
-This is the time the Program takes to convert the BIGNUM Object (String) into a float vector. This process is very timeconuming at very large numbers. Also it is neccesary that the length of the to numers are set equal. This is done with ending zeros at the front of the number.
+The time needed to prepare the data for the multiplication. The algorithm needs to convert the two numbers from the datatype bignum to float vectors. Float vectors are required for the \mintinline{c}{cudaMemcpy()} function. Also the size of the vectors needs to be adjusted, because cuFFT saves the solution in one of the initial bignums.
 \item[CUDA\_Post]\hfill \\ 
-This part of the program is responsible for processing the carry and turn the result back from an integer Vector to BIGNUM String.
+The time needed to prepare the result. This includes removing excess zeros, processing carry and turning the result from a float vector to a bignum.
 
 
 \end{description}
-
-
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 390.132                Driver Version: 390.132                   |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|===============================+======================+======================|
-|   0  GeForce GTX 850M    Off  | 00000000:01:00.0 Off |                  N/A |
-| N/A   52C    P0    N/A /  N/A |    273MiB /  2004MiB |     14%      Default |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory |
-|  GPU       PID   Type   Process name                             Usage      |
-|=============================================================================|
-|    0      1154      G   /usr/lib/xorg/Xorg                           150MiB |
-|    0      1974      G   /usr/bin/compiz                               50MiB |
-|    0     10361      C   ./cuda_mult                                   61MiB |
-+-----------------------------------------------------------------------------+
-
 
 
 
@@ -76,6 +58,8 @@ This part of the program is responsible for processing the carry and turn the re
 \section{Issues and Improvements}
 
 \section{Conclusion}
+
+\newpage
 
 \bibliography{literatur}
 
