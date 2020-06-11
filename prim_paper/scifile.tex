@@ -3,6 +3,7 @@
 %\usepackage[onehalfspacing]{setspace}
 \usepackage{minted}
 \usepackage{url}
+\usepackage{graphicx}
 \title{Multiplication of Two Bignums on a Nvidia Graphic Card}
 \author{Johannes H\"abe  \\
 	jh-191149@hs-weingarten.de
@@ -30,7 +31,7 @@ The fast multiplication of two large prime numbers is necessary in some procedur
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
 
 \section{Measurement conditions}
-The times for the multiplications of the two numbers are measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that we did computations for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent fluctuations because of random created numbers that are easy to multiply, one hundred multiplications with different numbers are done for each step of 24 bits.
+The times for the multiplications of the two numbers are measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that we did computations for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent fluctuations because of random created numbers that are easy to multiply, one hundred multiplications, each with random numbers, are done for each step of 24 bits.
 \section{Evaluation of the measured times}
 For the time measurement the C library function \mintinline{c}{clock(void)} is used. The legend of the graphics is explained in the following:
 \begin{description}
@@ -44,12 +45,35 @@ The time needed to allocate the amount of graphics card memory needed for the tw
 The amount of time needed for the calculation of the two bignums on the GPU. This includes converting the bignums to frequency domain, multiplying them with \mintinline{c}{ComplexPointwiseMulAndScale()} and converting them back to time domain.
 \item[GPU\_Clean]\hfill \\ 
 The sum of the times needed to copy the data back to the host by using \mintinline{c}{cudaMemcpy()} and to free the graphics card memory by using \mintinline{c}{cufftDestroy()} and \mintinline{c}{cudaFree()}.
-\item[CUDA\_Prep]\hfill \\ 
+\item[CUDA\_Pre]\hfill \\ 
 The time needed to prepare the data for the multiplication. The algorithm needs to convert the two numbers from the datatype bignum to float vectors. Float vectors are required for the \mintinline{c}{cudaMemcpy()} function. Also the size of the vectors needs to be adjusted, because cuFFT saves the solution in one of the initial bignums.
 \item[CUDA\_Post]\hfill \\ 
 The time needed to prepare the result. This includes removing excess zeros, processing carry and turning the result from a float vector to a bignum.
 
+\begin{table}
+\centering
+\caption{Average, minimum and maximum times measured of all bit sizes.}\label{AvgMaxMin}
+\begin{tabular}{p{2cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\cline{2-4}
+ & \multicolumn{3}{l|}{Times in seconds}  \\ \hline 
+ \multicolumn{1}{|l|}{} & $Minimum$ & $Maximum$ & $Average$\\ \hline
+ \multicolumn{1}{|l|}{CPU} & $1 \times 10^{-6}$ & $9 \times 10^{-5}$ & $4,16 \times 10^{-5}$ \\ \hline
+ \multicolumn{1}{|l|}{GPU\_All} & $1,72 \times 10^{-3}$ & $1,48 \times 10^{-2}$ & $7,19 \times 10^{-3}$ \\ \hline
+ \multicolumn{1}{|l|}{GPU\_Alloc} & $1,42 \times 10^{-3}$ & $6,13 \times 10^{-3}$ & $3,67 \times 10^{-3}$ \\ \hline
+ \multicolumn{1}{|l|}{GPU\_Calc} & $8,7 \times 10^{-5}$ & $4,48 \times 10^{-4}$ & $2,45 \times 10^{-4}$ \\ \hline
+ \multicolumn{1}{|l|}{GPU\_Clean} & $1,71 \times 10^{-4}$ & $8,17 \times 10^{-4}$ & $4,23 \times 10^{-4}$ \\ \hline
+ \multicolumn{1}{|l|}{CUDA\_Pre} & $8 \times 10^{-6}$ & $6,88 \times 10^{-3}$ & $2,44 \times 10^{-3}$ \\ \hline
+ \multicolumn{1}{|l|}{CUDA\_Post} & $2 \times 10^{-6}$ & $9,21 \times 10^{-4}$ & $3,97 \times 10^{-4}$ \\ \hline
+\end{tabular}
+\end{table}
 
+\begin{figure}[hbt!]
+\centering 
+\includegraphics[scale=0.32]{all_times.png}
+\label{all_times} 
+\end{figure}
+
+The measurements were also done on two more computers, to make sure, that the structure of the resulting graphs is nearly the same and not a specific result of the depending hardware of the computers. The assumption was confirmed.
 \end{description}
 
 
