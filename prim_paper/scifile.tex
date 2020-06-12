@@ -82,7 +82,7 @@ In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculat
 \end{center}
 
 \begin{center}
-    $CPU_{poly}(x) = 1.77*10^{-11}x^2 + 6.295*10^{-8}x - 4.799*10^{-6}x$
+    $CPU_{poly}(x) = 1.77*10^{-11}x^2 + 6.295*10^{-8}x - 4.799*10^{-6}$
 \end{center}
 
  It seems like the GPU is getting more effective in comparison to the CPU, the bigger the numbers get.
@@ -91,6 +91,7 @@ The measurements were also done on two more computers, to make sure, that the st
 
 
 \section{Issues and Improvements}
+The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. Even if we only compare the calculation process on the GPU the CPU up to 28000 bits the CPU is still at least 5 times faster than the GPU. With parallel computing of multiple computations on the gpu, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory.
 
 \section{Conclusion}
 
