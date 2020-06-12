@@ -49,6 +49,7 @@ The sum of the times needed to copy the data back to the host by using \mintinli
 The time needed to prepare the data for the multiplication. The algorithm needs to convert the two numbers from the datatype bignum to float vectors. Float vectors are required for the \mintinline{c}{cudaMemcpy()} function. Also the size of the vectors needs to be adjusted, because cuFFT saves the solution in one of the initial bignums.
 \item[CUDA\_Post]\hfill \\ 
 The time needed to prepare the result. This includes removing excess zeros, processing carry and turning the result from a float vector to a bignum.
+\end{description}
 
 \begin{table}
 \centering
@@ -69,14 +70,24 @@ The time needed to prepare the result. This includes removing excess zeros, proc
 
 \begin{figure}[hbt!]
 \centering 
-\includegraphics[scale=0.32]{all_times.png}
-\label{all_times} 
+\caption{GPU\_Calc (blue) and CPU (red) with computed polynomial.}
+\includegraphics[scale=0.5]{gpucalc_cpu.png}
+\label{cpugpu_times} 
 \end{figure}
 
+In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are seen. The minimum is for all seven categories located between 24 and 120 bits, the maximum was always close to 28000 bits. We can derive from the table, that GPU\_Alloc and CUDA\_Pre cost by far the most time. With Numbers by Apple, the second grade polynomial of GPU\_Calc and CPU were computed and visualized in figure \ref{cpugpu_times} with the original graphs. The slope of the blue polynomial ist getting smaller, while the slope of the green polynomial is increasing.
+
+\begin{center}
+    $GPU\_Calc_{poly}(x) = -1.269*10^{-10}x^2 + 3.086*10^{-7}x + 0.0001$
+\end{center}
+
+\begin{center}
+    $CPU_{poly}(x) = 1.77*10^{-11}x^2 + 6.295*10^{-8}x - 4.799*10^{-6}x$
+\end{center}
+
+ It seems like the GPU is getting more effective in comparison to the CPU, the bigger the numbers get.
+
 The measurements were also done on two more computers, to make sure, that the structure of the resulting graphs is nearly the same and not a specific result of the depending hardware of the computers. The assumption was confirmed.
-\end{description}
-
-
 
 
 \section{Issues and Improvements}
