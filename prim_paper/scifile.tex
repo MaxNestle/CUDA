@@ -71,11 +71,13 @@ The time needed to prepare the result. This includes removing excess zeros, proc
 \begin{figure}[hbt!]
 \centering 
 \caption{GPU\_Calc (blue) and CPU (red) with computed polynomial.}
-\includegraphics[scale=0.5]{gpucalc_cpu.png}
+\includegraphics[scale=0.66]{gpucalc_cpu_des.png}
 \label{cpugpu_times} 
 \end{figure}
 
-In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are seen. The minimum is for all seven categories located between 24 and 120 bits, the maximum was always close to 28000 bits. We can derive from the table, that GPU\_Alloc and CUDA\_Pre cost by far the most time. With Numbers by Apple, the second grade polynomial of GPU\_Calc and CPU were computed and visualized in figure \ref{cpugpu_times} with the original graphs. The slope of the blue polynomial ist getting smaller, while the slope of the green polynomial is increasing.
+In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are seen. The minimum is for all seven categories located between 24 and 120 bits, the maximum was always close to 28000 bits. We can derive from the table, that GPU\_Alloc and CUDA\_Pre cost by far the most time. They are each in average about one hundred times slower than the CPU calculation.
+
+ With Numbers by Apple, the second grade polynomial of GPU\_Calc and CPU were computed and visualized in figure \ref{cpugpu_times} with the original graphs. The slope of the blue polynomial ist getting smaller, while the slope of the green polynomial is increasing.
 
 \begin{center}
     $GPU\_Calc_{poly}(x) = -1.269*10^{-10}x^2 + 3.086*10^{-7}x + 0.0001$
@@ -91,11 +93,10 @@ The measurements were also done on two more computers, to make sure, that the st
 
 
 \section{Issues and Improvements}
-The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. Even if we only compare the calculation process on the GPU the CPU up to 28000 bits the CPU is still at least 5 times faster than the GPU. With parallel computing of multiple computations on the gpu, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory.
+The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. Even if we only compare the calculation process on the GPU the CPU up to 28000 bits the CPU is still at least 5 times faster than the GPU. With parallel computing of multiple pairs of numbers on the GPU, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory with just one call of \mintinline{c}{cudaMemcpy()}.
 
 \section{Conclusion}
-
-\newpage
+To sum it up..
 
 \bibliography{literatur}
 
