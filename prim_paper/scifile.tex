@@ -96,7 +96,7 @@ The measurements were also done on two more computers, to make sure, that the st
 The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. Even if we only compare the calculation process on the GPU the CPU up to 28000 bits the CPU is still at least 5 times faster than the GPU. With parallel computing of multiple pairs of numbers on the GPU, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory with just one call of \mintinline{c}{cudaMemcpy()}.
 
 \section{Conclusion}
-The time measurements lead to the conclusion, that multiplying one pair of numbers on a GPU with cuFFT is way too inefficient, computing them on the CPU is the recommended way. Although more experiments would be needed to...
+The time measurements lead to the conclusion, that multiplying one pair of numbers on a GPU with cuFFT is way too inefficient, computing them on the CPU is the recommended way. Although more performance improvement experiments would be needed to  confirm the assertion.
 
 \bibliography{literatur}
 
