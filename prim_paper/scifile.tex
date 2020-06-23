@@ -21,14 +21,16 @@
 \maketitle
 %
 \begin{abstract}
-This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying large numbers (bignums) on the graphics card. The performance is measured up to the size of 28000 bits for each factor. The factors are also multiplied on the CPU using the Karatsuba algorithm. The measured times from CPU and GPU computation are compared. For the multiplication of two bignums, performance of the CPU turned out to be in average about one hundred times faster than multiplication on the GPU. The reason for that is, that the preparation (allocation of VRAM, copying data to VRAM) for the multiplication on the GPU is too expensive for only multiplying two factors of the size of 28000 bits. Even taking only the measured times for the pure multiplication, the GPU is still slower than the CPU. By increasing size of the factors from 24 bit up to 28000 bits, the measured times between CPU and GPU are getting closer to each other. The larger the numbers get, the more effective becomes the multiplication on the GPU.
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying large numbers (bignums) on the graphics card. The performance is measured up to the size of 28000 bits for each factor. The factors are also multiplied on the CPU using the Karatsuba algorithm. For the multiplication of two bignums, performance of the CPU turned out to be in average about one hundred times faster than multiplication on the GPU. The reason for that is, that the preparation (allocation of VRAM, copying data to VRAM) for the multiplication on the GPU is too expensive for only multiplying two factors of the size of 28000 bits. Even taking only the measured times for the pure multiplication, the GPU is still slower than the CPU. By increasing size of the factors from 24 bit up to 28000 bits, the measured times between CPU and GPU are getting closer to each other.
 \end{abstract}
 
 \section{Introduction}
 The fast multiplication of two large prime numbers is necessary in some procedures to attack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Classical approaches have $O(n^2)$ complexity, but polynomial multiplication with FFT has $O(nlogn)$ complexity \cite{bantikyan2014big}. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignums with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
 \section{Background}
-FFT Basics, related work
+CUFFT Library employs the Cooley-Tukey algorithm to reduce the number of required operations \cite{nvidia2012cuda} resulting in $O(nlogn)$ complexity. 
+
+TODO: fft formeln hier reinballern
 
 \section{Measurement conditions}
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
@@ -97,9 +99,9 @@ From figure \ref{cpugpu_times} it can be derived, that the GPU is getting more e
 The measurements were also done on two more computers, to make sure, that the structure of the resulting graphs is nearly the same and not a specific result of the depending hardware of the computers. The assumption was confirmed.
 
 \section{Conclusion}
-The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. Even if only the calculation process on the GPU with the CPU are compared, the CPU is up to 28000 bits still at least 5 times faster than the GPU. With parallel computing of multiple pairs of numbers on the GPU, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory with just one call of \mintinline{c}{cudaMemcpy()}.
+The big issues are that the times needed for preparation and allocation of the GPU are totally out of range. The CPU is able to store all data in cache, GPU data transfer takes too long \cite{cooper2011gpu}. Even if only the calculation process on the GPU with the CPU are compared, the CPU is up to 28000 bits still at least 5 times faster than the GPU. With parallel computing of multiple pairs of numbers on the GPU, it can be assumed that the process can be accelerated, for example by allocating a bigger amount of VRAM and putting multiple pairs of numbers on the graphics card memory with just one call of \mintinline{c}{cudaMemcpy()}.
 
-The time measurements lead to the conclusion, that multiplying only one pair of numbers on a GPU with cuFFT is way too inefficient, computing them on the CPU is the recommended way. An exception could be computing numbers that are way bigger than 28000 bits. Although more performance improvement experiments would be needed to confirm the assertion.
+The time measurements lead to the conclusion, that multiplying only one pair of numbers on a GPU with cuFFT is way too inefficient, computing them on the CPU is the recommended way. An exception could be mulitplying numbers that are way bigger than 28000 bits, because the larger the numbers get, the more effective becomes the multiplication on the GPU. Although more performance improvement experiments would be needed to confirm the assertion.
 
 \bibliography{literatur}
 
