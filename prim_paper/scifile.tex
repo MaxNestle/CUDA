@@ -41,9 +41,10 @@ Radix-2 DIT, which is the simplest and most common form of the Cooley–Tukey al
 
 TODO: Why use FFT? (recommended use number $>$ 10000 digits, 28000 bits ca 10000 digits) Anything different multiplying primes?
 
-\subsection{Architecture GPU}
-
+\subsection{Special Features GPU}
 TODO: Why use GPU? Explanation of special features of architecture.
+
+GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two bignums via FFT, because...
 
 \section{Methodology}
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
