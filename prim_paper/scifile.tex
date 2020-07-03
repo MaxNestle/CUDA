@@ -28,7 +28,7 @@ This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Tran
 The fast multiplication of two large prime numbers is necessary in some procedures to attack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Classical approaches have $O(n^2)$ complexity, but polynomial multiplication with FFT has $O(nlogn)$ complexity \cite{bantikyan2014big}. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignums with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
 \section{Related Work}
-TODO: other papers reviewd
+Hovhannes Bantikyan from the University of Armenia did time measurements up to the size of 200000 digits for each factor and compared the results with other bignum multiplication libraries \cite{bantikyan2014big}. On the contrary, the results of cuFFT are compared with the \mintinline{c}{BN_mul()} function in this paper.
 
 \section{Technical Introduction}
 
@@ -43,7 +43,7 @@ TODO: Why use FFT? (recommended use number $>$ 10000 digits, 28000 bits ca 10000
 \newpage %kommt later on raus
 
 \subsection{Special Features GPU}
-GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two numbers, because multiplication always is a process of many tiny multiplications that are summed up.
+GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two numbers, because multiplication always is a process of many tiny multiplications that are summed up. Computations on the CPU are preferred when multiplying tiny numbers, because of the low memory access times \cite{albers2009grafik}.
 
 \begin{figure}[hbt!]
 \centering 
@@ -56,8 +56,6 @@ GPUs that are used in modern computers do have hundreds of cores and many more t
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
 
 The computation time for the multiplications of the two numbers is measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that computations are done for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent variations because of random created numbers that are easy to multiply, one hundred multiplications, each with random numbers, are done for each step of 24 bits.
-
-\newpage %kommt later on raus
 
 \section{Results}
 For the time measurement the C library function \mintinline{c}{clock(void)} is used. The legend of the measured times is explained in table \ref{Description}. In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are seen. The minimum is for all seven categories located between 24 and 120 bits, the maximum was always close to 28000 bits. It can be derived from the table, that GPU\_Alloc and CUDA\_Pre cost by far the most time. They take each in average about one hundred times more time than the CPU calculation.
