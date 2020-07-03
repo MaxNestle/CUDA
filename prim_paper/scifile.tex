@@ -27,9 +27,8 @@ This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Tran
 \section{Introduction}
 The fast multiplication of two large prime numbers is necessary in some procedures to attack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Classical approaches have $O(n^2)$ complexity, but polynomial multiplication with FFT has $O(nlogn)$ complexity \cite{bantikyan2014big}. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignums with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
-\section{Background}
-TODO: 
-Typically, the background of a study includes a review of the existing literature on the area of your research, leading up to your topic. Once you have discussed the contribution of other researchers in the field, you can identify gaps in understanding, that is, areas that have not been addressed in these studies. You can then explain how your study will address these gaps and how it will contribute to the existing knowledge in the field. Thus, the background of the study generates the reader's interest in your research question and helps them understand why your study is important.
+\section{Related Work}
+TODO: other papers reviewd
 
 \section{Technical Introduction}
 
@@ -41,10 +40,17 @@ Radix-2 DIT, which is the simplest and most common form of the Cooley–Tukey al
 
 TODO: Why use FFT? (recommended use number $>$ 10000 digits, 28000 bits ca 10000 digits) Anything different multiplying primes?
 
-\subsection{Special Features GPU}
-TODO: Why use GPU? Explanation of special features of architecture.
+\newpage %kommt later on raus
 
-GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two bignums via FFT, because...
+\subsection{Special Features GPU}
+GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two numbers, because multiplication always is a process of many tiny multiplications that are summed up.
+
+\begin{figure}[hbt!]
+\centering 
+\caption{CPU cores (blue) and GPU cores (green)}
+\includegraphics[scale=0.33]{cpugpu.png}
+\label{cpugpu_times} 
+\end{figure}
 
 \section{Methodology}
 For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
