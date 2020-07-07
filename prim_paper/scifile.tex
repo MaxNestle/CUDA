@@ -1,9 +1,9 @@
 \documentclass[12pt,a4paper]{article}
-\bibliographystyle{alphadin}
 %\usepackage[onehalfspacing]{setspace}
 \usepackage{minted}
 \usepackage{url}
 \usepackage{graphicx}
+\bibliographystyle{ieeepes}
 \title{Multiplication of Two Bignums on a Nvidia Graphic Card}
 \author{Johannes H\"abe  \\
 	jh-191149@hs-weingarten.de
@@ -21,42 +21,42 @@
 \maketitle
 %
 \begin{abstract}
-This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying large numbers (bignums) on the graphics card. The performance is measured up to the size of 28000 bits for each factor. The factors are also multiplied on the CPU using the Karatsuba algorithm. For the multiplication of two bignums, performance of the CPU turned out to be in average about one hundred times faster than multiplication on the GPU. The reason for that is, that the preparation (allocation of VRAM, copying data to VRAM) for the multiplication on the GPU is too expensive for only multiplying two factors of the size of 28000 bits. Even taking only the measured times for the pure multiplication, the GPU is still slower than the CPU. By increasing size of the factors from 24 bit up to 28000 bits, the measured times between CPU and GPU are getting closer to each other.
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying large numbers (bignums) on the graphics card. The performance is measured up to the size of 28000 bits for each factor. The factors are also multiplied on the CPU using the Karatsuba algorithm. For the multiplication of two bignums, performance of the CPU turned out to be in average about one hundred times faster than multiplication on the GPU. Even taking only the measured times for the pure multiplication, the GPU is still slower than the CPU. By increasing size of the factors from 24 bit up to 28000 bits, the measured times between CPU and GPU are gradually approaching.
 \end{abstract}
 
 \section{Introduction}
-The fast multiplication of two large prime numbers is necessary in some procedures to attack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Classical approaches have $O(n^2)$ complexity, but polynomial multiplication with FFT has $O(nlogn)$ complexity \cite{bantikyan2014big}. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignums with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
+The fast multiplication of two large prime numbers is necessary in some procedures to attack asymmetrical encryption algorithms like the RSA encryption. These computations are normally made on the CPU. Classical approaches have $O(n^2)$ complexity, but polynomial multiplication with FFT has $O(n \cdot logn)$ complexity \cite{bantikyan2014big}. Within this paper, General Purpose Computing On GPUs (GPGPU) is used to multiply bignums with the help of the NVIDIA CUDA Fast Fourier Transform library (cuFFT). For this purpose, the computing time of bignum multiplication on CPU and GPU is compared and evaluated in this paper.
 
 \section{Related Work}
-Hovhannes Bantikyan from the University of Armenia did time measurements up to the size of 200000 digits for each factor and compared the results with other bignum multiplication libraries \cite{bantikyan2014big}. In contrast to that, the results of cuFFT are compared with the \mintinline{c}{BN_mul()} function in this paper. The factors are also measured up in smaller steps of size 24 bits. Ando Emerencia also did time measurements in his paper "Multiplying huge Integers using Fourier Transforms" \cite{emerencia2007multiplying}. He did time measurements with different bases as well as Maximum Square Error tests.
+Hovhannes Bantikyan from the University of Armenia did time measurements up to the size of 200000 digits for each factor and compared the results with other bignum multiplication libraries \cite{bantikyan2014big}. In contrast to that, the results of cuFFT are compared with the \mintinline{c}{BN_mul()} function from the openssl library in this paper. The size of the factors is also increased and measured in smaller steps of 24 bits. Ando Emerencia also included time measurements in his paper "Multiplying huge Integers using Fourier Transforms" \cite{emerencia2007multiplying}. He compared time measurements of mulitplications with different bases, furthermore he did Maximum Square Error tests.
 
 \section{Technical Background}
 
 \subsection{Fast Fourier Transformation}
 The Fast Fourier Transformation (FFT) is based on the Discrete Fourier Transformation (DFT). The DFT of a vector $(x_{0},\dots ,x_{{2n-1}})$ of the size $2n$ is \cite{wiki:fft}:
 \begin{center}
-$f_m = \sum_{k=0}^{2n-1}x_k*e^{-\frac{2\pi*i}{2n}mk} \quad$ with $\quad m = 0,\dots,2n-1$.
+$$f_m = \sum_{k=0}^{2n-1}x_k \cdot e^{-\frac{2\pi \cdot i}{2n}mk} \quad$$ with $\quad m = 0,\dots,2n-1$.
 \end{center}
-Fast Fourier Transformation can be used to perform fast integer multiplication via fast polynomial multiplication. CUFFT Library employs the Cooley-Tukey algorithm to reduce the number of required operations resulting in $O(nlogn)$ complexity \cite{nvidia2012cuda}. The resulting complexity is reached by an divide and conquer approach \cite{bekele2016cooley}.
-Radix-2 DIT, which is the simplest and most common form of the Cooley–Tukey algorithm, first computes the DFTs of the even-indexed inputs and of the odd-indexed inputs and then combines those two results to produce the DFT of the whole sequence \cite{wiki:xxx}. By performing this recursively, the overall runtime can be reduced to O(nlogn).
+Fast Fourier Transformation can be used to perform fast integer multiplication via fast polynomial multiplication. CUFFT Library employs the Cooley-Tukey algorithm to reduce the number of required operations resulting in $O(n \cdot logn)$ complexity \cite{nvidia2012cuda}. The resulting complexity is reached by an divide and conquer approach \cite{bekele2016cooley}.
+Radix-2 decimation-in-time (DIT), which is the simplest and most common form of the Cooley–Tukey algorithm, first computes the DFTs of the even-indexed inputs and of the odd-indexed inputs and then combines those two results to produce the DFT of the whole sequence \cite{wiki:xxx}. By performing this recursively, the overall runtime can be reduced to $O(n \cdot logn)$.
 
 \subsection{Features GPU and CPU}
-GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two numbers, because multiplication always is a process of many tiny multiplications that are summed up. Computations on the CPU are preferred when multiplying tiny numbers, because of the low memory access times \cite{albers2009grafik}.
+CPUs have less cores than GPUs, but the cores are more powerful, that is visualized in figure \ref{cpu_gpu_cores} .GPUs that are used in modern computers do have hundreds of cores and many more threads, thus they are very effective in parallel computing \cite{Palacios2011ACO}. Parallel Computing speeds up the process when multiplying two numbers, because multiplication is always a process of many tiny multiplications that are summed up. Computations on the CPU are preferred when multiplying tiny numbers, because of the low memory access times \cite{albers2009grafik}.
 
 \begin{figure}[hbt!]
 \centering 
 \caption{CPU cores (blue) and GPU cores (green)}
 \includegraphics[scale=0.33]{cpugpu.png}
-\label{cpugpu_times} 
+\label{cpu_gpu_cores} 
 \end{figure}
 
 \section{Methodology}
-For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}. The \mintinline{c}{BN_mul()} function comes with the openssl library.
+For the multiplications an Acer Aspire V3-772G is used. The Acer has got a NVIDIA GTX 850M graphics card and an Intel Core i5 4200M CPU. The graphics card disposes of 2004 MIB storage. The Acer is running the Linux distribution Ubuntu. The code that is used to multiply two bignums on the GPU is using the cuFFT library from NVIDIA. The multiplications on the CPU are done with the \mintinline{c}{BN_mul()} function from the openssl library which is based on the Karatsuba recursive multiplication algorithm \cite{young1995bnmul}. The Karatsuba algorithm has $O(n^{1.585})$ complexity \cite{dietzfelbinger2012eff}.
 
-The computation time for the multiplications of the two numbers is measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that computations are done for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent variations because of random created numbers that are easy to multiply, one hundred multiplications, each with random numbers, are done for each step of 24 bits.
+The computation time for the multiplications of the two numbers is measured up to the size of 28000 bits for each factor. The step size for the multiplications is 24 bits. That means that computations are done for numbers of the size 24 bits, 48 bits, 72 bits and so on. The numbers used for computations are created randomly. To prevent variations caused by random created numbers that are easy to multiply, one hundred multiplications, each with random numbers, are done for each step of 24 bits.
 
 \section{Results}
-For the time measurement the C library function \mintinline{c}{clock()} is used. The legend of the measured times is explained in table \ref{Description}. In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are seen. The minimum is for all seven categories located between 24 and 120 bits, the maximum was always close to 28000 bits. It can be derived from the table, that GPU\_Alloc and CUDA\_Pre cost by far the most time. They take each in average about one hundred times more time than the CPU calculation.
+For the time measurement the C library function \mintinline{c}{clock()} is used. The legend of the measured times is explained in table \ref{Description}. In table \ref{AvgMaxMin} the minimum, maximum and average times for the calculations from 24 bits to 28800 bits are listed. The minimum for all seven categories is located between 24 and 120 bits, the maximum was always close to 28000 bits. Table \ref{AvgMaxMin} shows, that GPU\_Alloc and CUDA\_Pre cost by far the most time. They take each in average about one hundred times more time than the CPU calculation.
 
 \begin{table}
 \centering
@@ -102,14 +102,14 @@ For the time measurement the C library function \mintinline{c}{clock()} is used.
 \label{cpugpu_times} 
 \end{figure}
 
- With Numbers by Apple, the second grade polynomial of GPU\_Calc and CPU were computed and visualized in figure \ref{cpugpu_times} with the original graphs.
+The second grade polynomial of GPU\_Calc and CPU were computed and visualized in figure \ref{cpugpu_times} with the original graphs.
  
 \begin{center}
-    $GPU\_Calc_{poly}(x) = -1.269*10^{-10}x^2 + 3.086*10^{-7}x + 0.0001$
+    $GPU\_Calc_{poly}(x) = -1.269 \cdot 10^{-10}x^2 + 3.086 \cdot 10^{-7}x + 0.0001$
 \end{center}
 
 \begin{center}
-    $CPU_{poly}(x) = 1.77*10^{-11}x^2 + 6.295*10^{-8}x - 4.799*10^{-6}$
+    $CPU_{poly}(x) = 1.77 \cdot 10^{-11}x^2 + 6.295 \cdot 10^{-8}x - 4.799 \cdot 10^{-6}$
 \end{center}
 
 The slope of the blue polynomial is decreasing, while the slope of the green polynomial is increasing. It can be derived, that the GPU is getting more effective in comparison to the CPU, the bigger the numbers get. This assumption is only valid as long as we use Karatsuba for CPU and FFT for GPU. The graph reflects the complexities of the algorithms.
