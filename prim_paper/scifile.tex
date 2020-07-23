@@ -21,7 +21,7 @@
 \maketitle
 %
 \begin{abstract}
-This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying two large numbers (BigNums) on the graphics card. The performance is measured up to the size of 28.000 bits for each factor. These two factors were also multiplied on the CPU using the Karatsuba algorithm and compared to the cuFFT results. It turned out that the performance on the CPU is one hundred times faster than the multiplication on the GPU comparing a bit range from 24 bit up to 28.000 bits. By increasing size of the factors from 24 bit up to 28.000 bits, the measured times between CPU and GPU are gradually approaching.
+This paper is about testing the performance of the NVIDIA CUDA Fast Fourier Transform library (cuFFT) by multiplying two large numbers (BigNums) on the graphics card. The performance is measured up to the size of 28.000 bits for each factor. These two factors were also multiplied on the CPU using the Karatsuba algorithm and compared to the cuFFT results. It turned out that the performance on the CPU is one hundred times faster than the multiplication on the GPU comparing a bit range from 24 bit up to 28.000 bits by continuously increasing the size of the factors by 24 Bit. The measured times between the CPU and GPU are resulting in gradually approaching functions.
 \end{abstract}
 
 \section{Introduction}
